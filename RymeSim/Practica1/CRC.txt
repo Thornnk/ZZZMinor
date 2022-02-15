@@ -1,0 +1,24 @@
+        public int obtenerCRC_PCE(string cadenaOrigen)
+        {
+            int sumaASCII = 0;
+
+            for (int i = 0; i < cadenaOrigen.Length; i++)
+            {
+                sumaASCII += (int)cadenaOrigen[i];
+                sumaASCII %= 10000;
+            }
+
+            return sumaASCII;
+        }
+
+        public string componeComandoPCE(string comandoOrigen)
+        {
+            string componerComando = "";
+            string sumaComprobacion = "";
+
+            componerComando = "[;" + comandoOrigen + ";";
+            sumaComprobacion = obtenerCRC_PCE(componerComando).ToString("D4");
+            componerComando += sumaComprobacion + ";]";
+
+            return componerComando;
+        }
